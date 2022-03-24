@@ -1,0 +1,1 @@
+SELECT * FROM area.rfmos_convention_areas_fao
