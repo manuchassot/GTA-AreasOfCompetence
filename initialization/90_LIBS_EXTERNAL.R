@@ -26,7 +26,8 @@ p_load(
   "DT",
   "plotly",
   "ows4R",
-  "ritis"
+  "ritis",
+  "rnaturalearth"
   )
 
 print("External libraries initialized!")
