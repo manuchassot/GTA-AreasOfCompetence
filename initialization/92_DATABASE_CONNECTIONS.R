@@ -1,12 +1,6 @@
 
 print("Initializing connection to the Global Tuna Atlas...")
 
-# con_GTA = dbConnect(drv = PostgreSQL(),
-#                dbname   = "tunaatlas", 
-#                user     = "tunaatlas_inv",
-#                password = "fle087",
-#                host     = "db-tunaatlas.d4science.org")
-
 con_GTA = DBI::dbConnect(
   drv = RPostgreSQL::PostgreSQL(),
   host = "35.242.196.99",
@@ -15,5 +9,7 @@ con_GTA = DBI::dbConnect(
   port = "5432",
   dbname = "tunaatlas"
 )
+
+IOTDB_connection = iotc.core.db.connections::DB_IOTDB()
 
 print("GTA connection initialized!")
