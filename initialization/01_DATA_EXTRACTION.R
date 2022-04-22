@@ -29,8 +29,12 @@ TOTAL_CATCH_AREA_IATTC = data.table(TOTAL_CATCH_AREA)[source_authority == "IATTC
 
 TOTAL_CATCH_AREA_IOTC_SF = TOTAL_CATCH_AREA_SF %>% filter(source_authority == "IOTC")
 TOTAL_CATCH_AREA_CCSBT_SF = TOTAL_CATCH_AREA_SF %>% filter(source_authority == "CCSBT")
-TOTAL_CATCH_AREA_IOTC_SF = TOTAL_CATCH_AREA_SF %>% filter(source_authority == "ICCAT")
+TOTAL_CATCH_AREA_ICCAT_SF = TOTAL_CATCH_AREA_SF %>% filter(source_authority == "ICCAT")
 TOTAL_CATCH_AREA_WCPFC_SF = TOTAL_CATCH_AREA_SF %>% filter(source_authority == "WCPFC")
 TOTAL_CATCH_AREA_IATTC_SF = TOTAL_CATCH_AREA_SF %>% filter(source_authority == "IATTC")
+
+# Export shapefiles for CF
+st_write(IOTC_AREA, dsn = "../outputs/IOTC_AREA.shp", driver = "ESRI Shapefile")
+st_write(TOTAL_CATCH_AREA_SF, dsn = "../outputs/TOTAL_CATCH_AREA_SF.shp", driver = "ESRI Shapefile")
 
 print("Data extracted!")

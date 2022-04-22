@@ -18,8 +18,9 @@ BaseMap =
 
 BaseMap +
   geom_sf(data = TOTAL_CATCH_AREA_IOTC_SF, fill = alpha("blue", 0.2)) +
+  geom_sf(data = GRIDS_NOT_WITHIN_IOTC_AREA_SF, fill = alpha("red", .3), color = "red", size = .8) +
   #  geom_sf(data = IOTC_AREA_FIRMS, fill = alpha("red", .3), color = "red", size = .8) +
-  geom_sf(data = GRIDS_NOT_WITHIN_IOTC_AREA_SF, fill = "red") +
+  #geom_sf(data = GRIDS_NOT_WITHIN_IOTC_AREA_SF, fill = "red") +
   geom_sf(data = IOTC_AREA, fill = NA, size = 1, col = "green") +
     labs(x = "Longitude", y = "Latitude") +
   coord_sf(xlim = c(10, 155), ylim = c(-65, 40), expand = FALSE)
