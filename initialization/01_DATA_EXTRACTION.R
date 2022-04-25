@@ -1,7 +1,11 @@
 print("Initializing data extraction...")
 
-# TRFMO AREAS #### 
+# WORLD BORDERS ####
+QUERY_WORLD_BORDERS = read_file("../inputs/queries/WORLD_BORDERS.sql")
+WORLD_BORDERS = dbGetQuery(con_GTA, QUERY_WORLD_BORDERS)
+WORLD_BORDERS_SF = st_make_valid(st_as_sf(WORLD_BORDERS, wkt = "geom_wkt", crs = 4326))
 
+# TRFMO AREAS #### 
 QUERY_TRFMOS_AREAS = read_file("../inputs/queries/FIRMS_TRMOS_AREAS_OF_COMPETENCE.sql")
 TRFMOS_AREAS = dbGetQuery(con_GTA, QUERY_TRFMOS_AREAS)
 TRFMOS_AREAS_SF = st_as_sf(TRFMOS_AREAS, wkt = "geom_wkt", crs = 4326)
@@ -13,8 +17,8 @@ CCSBT_AREA_FIRMS = TRFMOS_AREAS_SF %>% filter(code == "CCSBT")
 # IOTC area (official)
 #IOTC_AREA   = iotc.core.gis.wkt::sf_by_code(fishing_ground_codes = "IRALLIO") # TO BE CORRECTED
 IOTC_AREAS_WKT = dbGetQuery(con_GTA, "SELECT code, label, code_cwp, st_asText(geom) AS geom_wkt FROM area.areas_task1_iotc;")
-IOTC_AREAS     = st_make_valid(st_as_sf(IOTC_AREAS_WKT, wkt = "geom_wkt", crs = 4326))
-IOTC_AREA  = st_union(IOTC_AREAS)
+IOTC_AREAS = st_make_valid(st_as_sf(IOTC_AREAS_WKT, wkt = "geom_wkt", crs = 4326))
+IOTC_AREA = st_union(IOTC_AREAS)
 
 # Global catches
 QUERY_TOTAL_CATCH_AREA = read_file("../inputs/queries/GTA_TOTAL_CATCH_AREA.sql")
@@ -34,7 +38,8 @@ TOTAL_CATCH_AREA_WCPFC_SF = TOTAL_CATCH_AREA_SF %>% filter(source_authority == "
 TOTAL_CATCH_AREA_IATTC_SF = TOTAL_CATCH_AREA_SF %>% filter(source_authority == "IATTC")
 
 # Export shapefiles for CF
-st_write(IOTC_AREA, dsn = "../outputs/IOTC_AREA.shp", driver = "ESRI Shapefile")
-st_write(TOTAL_CATCH_AREA_SF, dsn = "../outputs/TOTAL_CATCH_AREA_SF.shp", driver = "ESRI Shapefile")
+#st_write(IOTC_AREAS, dsn = "../outputs/IOTC_AREAS.shp", driver = "ESRI Shapefile")
+#st_write(IOTC_AREA, dsn = "../outputs/IOTC_AREA.shp", driver = "ESRI Shapefile")
+#st_write(TOTAL_CATCH_AREA_SF, dsn = "../outputs/TOTAL_CATCH_AREA_SF.shp", driver = "ESRI Shapefile")
 
 print("Data extracted!")
